@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result - Pneumonia Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Analysis Result</h1>
+
+    <div class="result-box">
+      <h2>Prediction:
+        <span class="{{ 'normal-text' if label == 'NORMAL' else 'pneumonia-text' }}">
+          {{ label }}
+        </span>
+      </h2>
+      <p>Confidence: <strong>{{ confidence|float|round(2) }}%</strong></p>
+
+      <div class="result-images">
+        <div>
+          <h3>Uploaded X-ray</h3>
+          <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" class="uploaded-img">
+        </div>
+      </div>
+    </div>
+
+    <a href="/" class="btn back-btn">Upload Another</a>
+  </div>
+</body>
+</html>
