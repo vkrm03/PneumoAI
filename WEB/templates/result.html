@@ -26,8 +26,15 @@
 
         {% if gradcam %}
         <div>
-          <h3>Grad-CAM Visualization</h3>
+          <h3>Grad-CAM Heatmap</h3>
           <img src="{{ url_for('static', filename='gradcam/' + gradcam) }}" alt="Grad-CAM Heatmap" class="uploaded-img">
+        </div>
+        {% endif %}
+
+        {% if box %}
+        <div>
+          <h3>Detected Regions</h3>
+          <img src="{{ url_for('static', filename='gradcam/' + box) }}" alt="Bounding Boxes" class="uploaded-img">
         </div>
         {% endif %}
       </div>
