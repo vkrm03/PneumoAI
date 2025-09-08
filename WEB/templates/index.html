@@ -5,16 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pneumonia Detection</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .upload-box {
+      border: 2px dashed #7a5fdb;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background-color 0.3s ease;
+    }
+    .upload-box.drag-over {
+      background-color: #f0eaff;
+    }
+    .file-name {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+    }
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>🩻 Pneumonia Detection System</h1>
     <p>Upload your chest X-ray and let our AI model predict whether it’s <strong>Normal</strong> or <strong>Pneumonia</strong>.</p>
 
-    <form action="/" method="POST" enctype="multipart/form-data" class="upload-form">
-      <div class="upload-box" onclick="document.getElementById('fileInput').click()">
-        <p>Drag & Drop or Click to Upload</p>
-        <input type="file" id="fileInput" name="file" accept="image/*" style="display:none" required>
+    <form id="uploadForm" action="/" method="POST" enctype="multipart/form-data" class="upload-form">
+      <div class="upload-box" id="uploadBox">
+        <p id="uploadText">Drag & Drop or Click to Upload</p>
+        <input type="file" id="fileInput" name="file" accept="image/png, image/jpeg, image/jpg" style="display:none" required>
+        <div class="file-name" id="fileName"></div>
+        <div class="error-message" id="errorMessage"></div>
       </div>
       <button type="submit" class="btn">Analyze X-ray</button>
     </form>
@@ -33,5 +59,57 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+    const errorMessage = document.getElementById('errorMessage');
+    const uploadBox = document.getElementById('uploadBox');
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+    uploadBox.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', () => {
+      handleFile(fileInput.files[0]);
+    });
+
+    uploadBox.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadBox.classList.add('drag-over');
+    });
+
+    uploadBox.addEventListener('dragleave', () => {
+      uploadBox.classList.remove('drag-over');
+    });
+
+    uploadBox.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadBox.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      fileInput.files = e.dataTransfer.files;
+      handleFile(file);
+    });
+
+    function handleFile(file) {
+      if (!file) return;
+
+      if (!allowedTypes.includes(file.type)) {
+        errorMessage.textContent = "Invalid file type. Please upload a JPG or PNG image.";
+        fileName.textContent = "";
+        fileInput.value = "";
+        return;
+      }
+
+      errorMessage.textContent = "";
+      fileName.textContent = `Selected File: ${file.name}`;
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      if (!fileInput.value) {
+        e.preventDefault();
+        errorMessage.textContent = "Please select a valid image before submitting.";
+      }
+    });
+  </script>
 </body>
 </html>
