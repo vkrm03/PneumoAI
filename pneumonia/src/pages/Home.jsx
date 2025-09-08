@@ -3,7 +3,6 @@ import React from "react";
 function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
-      {/* Header */}
       <header className="text-center py-12">
         <h1 className="text-4xl font-extrabold mb-4">🩻 Pneumonia Detection System</h1>
         <p className="text-lg max-w-2xl mx-auto">
@@ -13,14 +12,12 @@ function HomePage() {
         </p>
       </header>
 
-      {/* Reference Image Section */}
       <section className="max-w-5xl mx-auto bg-white text-black rounded-lg shadow-xl p-8">
         <h2 className="text-2xl font-bold text-center mb-6">
           📊 Reference X-ray Images
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Normal */}
           <div className="relative">
             <img
             style={{width: '100%', height: '450px'}}
@@ -32,8 +29,6 @@ function HomePage() {
               Normal
             </span>
           </div>
-
-          {/* Pneumonia */}
           <div className="relative">
             <img
               src="https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg"
@@ -53,7 +48,6 @@ function HomePage() {
         </p>
       </section>
 
-      {/* Call to Action */}
       <section className="mt-16 text-center">
         <h2 className="text-3xl font-bold mb-4">🩺 Ready to Analyze?</h2>
         <p className="mb-6">
@@ -66,8 +60,6 @@ function HomePage() {
           Upload & Analyze
         </a>
       </section>
-
-      {/* Footer */}
       <footer className="mt-16 py-6 text-center text-sm text-gray-200">
          Pneumonia Analyzer | Built with ❤️ by HackSparrow
       </footer>
