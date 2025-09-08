@@ -5,18 +5,19 @@ function Analyzer() {
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
 
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const handleFileSelect = (file) => {
+    if (file && file.type.startsWith("image/")) {
       setImage(file);
       setPreview(URL.createObjectURL(file));
-      setResult(null); // reset old result
+      setResult(null);
+    } else {
+      alert("Only image files are allowed (JPG, PNG, etc.)");
     }
   };
 
   const handleAnalyze = () => {
     if (!image) {
-      alert("Please choose an X-ray image first.");
+      alert("Please upload an X-ray image first.");
       return;
     }
 
@@ -32,29 +33,45 @@ function Analyzer() {
 
   return (
     <div className="p-8 text-center">
-      <h2 className="text-2xl font-bold mb-4 text-white">Upload Chest X-ray</h2>
+      <h2 className="text-2xl font-bold mb-6 text-white">Upload Chest X-ray</h2>
 
-      {/* Hidden file input */}
-      <input
-        id="fileInput"
-        type="file"
-        accept="image/*"
-        onChange={handleUpload}
-        className="hidden"
-      />
-
-      {/* Choose Image button */}
-      <label
-        htmlFor="fileInput"
-        className="px-4 py-2 bg-gray-600 text-white rounded cursor-pointer hover:bg-gray-700 mr-4"
+      {/* Drag & Drop / Click Upload Zone */}
+      <div
+        className="w-full max-w-lg mx-auto p-10 border-4 border-dashed rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 transition"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          e.preventDefault();
+          const file = e.dataTransfer.files[0];
+          handleFileSelect(file);
+        }}
+        onClick={() => document.getElementById("image-upload").click()}
       >
-        Choose Image
-      </label>
+        {preview ? (
+          <img
+            src={preview}
+            alt="Uploaded Preview"
+            className="mx-auto w-64 h-64 object-contain"
+          />
+        ) : (
+          <p className="text-gray-600">
+            Drag & Drop X-ray here or <span className="font-semibold">Click to Browse</span>
+          </p>
+        )}
+      </div>
+
+      {/* Hidden file input for click fallback */}
+      <input
+        type="file"
+        id="image-upload"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={(e) => handleFileSelect(e.target.files[0])}
+      />
 
       {/* Upload & Analyze button */}
       <button
         onClick={handleAnalyze}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
       >
         Upload & Analyze
       </button>
@@ -63,11 +80,15 @@ function Analyzer() {
         <div className="mt-10 bg-white p-6 rounded-lg shadow-lg max-w-5xl mx-auto">
           {/* Analysis Results */}
           <div className="text-left mb-6">
-            <p><strong>Prediction:</strong> {result.prediction}</p>
-            <p><strong>Confidence:</strong> {result.confidence}</p>
+            <p>
+              <strong>Prediction:</strong> {result.prediction}
+            </p>
+            <p>
+              <strong>Confidence:</strong> {result.confidence}
+            </p>
           </div>
 
-          {/* Uploaded and Digital Images */}
+          {/* Uploaded and Finding Images */}
           <div className="flex justify-center gap-8">
             <div>
               <h3 className="font-semibold mb-2">Uploaded Image</h3>
@@ -78,10 +99,10 @@ function Analyzer() {
               />
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Digital Image</h3>
+              <h3 className="font-semibold mb-2">Finding Image</h3>
               <img
                 src={preview}
-                alt="Digital X-ray"
+                alt="Finding X-ray"
                 className="w-64 h-64 object-contain border filter grayscale contrast-200"
               />
             </div>

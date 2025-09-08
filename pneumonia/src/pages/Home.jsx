@@ -1,5 +1,4 @@
 import React from "react";
-import pneumoniaImg from "../assets/jZqpV51.png"; // place image in /src/assets/
 
 function HomePage() {
   return (
@@ -9,9 +8,8 @@ function HomePage() {
         <h1 className="text-4xl font-extrabold mb-4">🩻 Pneumonia Detection System</h1>
         <p className="text-lg max-w-2xl mx-auto">
           Upload your chest X-ray and let our AI-powered system help identify 
-          whether it’s <span className="font-semibold">Normal</span>, 
-          <span className="font-semibold"> Bacterial Pneumonia</span>, or 
-          <span className="font-semibold"> Viral Pneumonia</span>.
+          whether it’s <span className="font-semibold">Normal</span> or{" "}
+          <span className="font-semibold">Pneumonia</span>.
         </p>
       </header>
 
@@ -20,42 +18,39 @@ function HomePage() {
         <h2 className="text-2xl font-bold text-center mb-6">
           📊 Reference X-ray Images
         </h2>
-        <img
-          src={pneumoniaImg}
-          alt="Normal vs Bacterial vs Viral Pneumonia"
-          className="rounded-lg shadow-md mx-auto"
-        />
-        <p className="mt-6 text-center text-gray-700">
-          These sample X-rays illustrate the visual differences between{" "}
-          <span className="font-semibold">Normal lungs</span>,{" "}
-          <span className="font-semibold">Bacterial Pneumonia</span>, and{" "}
-          <span className="font-semibold">Viral Pneumonia</span>.
-        </p>
-      </section>
 
-      {/* Info Cards */}
-      <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-8 max-w-6xl mx-auto">
-        <div className="bg-white text-black rounded-lg p-6 shadow-lg hover:scale-105 transform transition">
-          <h3 className="text-xl font-semibold mb-3">🔹 Normal</h3>
-          <p>
-            Healthy lungs with clear airways. No abnormal opacities or
-            infections detected. AI should classify this as safe.
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Normal */}
+          <div className="relative">
+            <img
+            style={{width: '100%', height: '450px'}}
+              src="https://prod-images-static.radiopaedia.org/images/220869/76052f7902246ff862f52f5d3cd9cd_big_gallery.jpg"
+              alt="Normal Lung"
+              className="rounded-lg shadow-md mx-auto"
+            />
+            <span className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded-md font-semibold">
+              Normal
+            </span>
+          </div>
+
+          {/* Pneumonia */}
+          <div className="relative">
+            <img
+              src="https://prod-images-static.radiopaedia.org/images/1371188/0a1f5edc85aa58d5780928cb39b08659c1fc4d6d7c7dce2f8db1d63c7c737234_big_gallery.jpeg"
+              alt="Pneumonia Lung"
+              className="rounded-lg shadow-md mx-auto"
+            />
+            <span className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-3 py-1 rounded-md font-semibold">
+              Pneumonia
+            </span>
+          </div>
         </div>
-        <div className="bg-white text-black rounded-lg p-6 shadow-lg hover:scale-105 transform transition">
-          <h3 className="text-xl font-semibold mb-3">🦠 Bacterial Pneumonia</h3>
-          <p>
-            Caused by bacteria such as <em>Streptococcus pneumoniae</em>. 
-            X-rays show localized, dense white patches indicating infection.
-          </p>
-        </div>
-        <div className="bg-white text-black rounded-lg p-6 shadow-lg hover:scale-105 transform transition">
-          <h3 className="text-xl font-semibold mb-3">🧬 Viral Pneumonia</h3>
-          <p>
-            Caused by viruses such as Influenza or COVID-19. X-rays show
-            widespread hazy opacities, more diffuse than bacterial pneumonia.
-          </p>
-        </div>
+
+        <p className="mt-6 text-center text-gray-700">
+          These examples illustrate the difference between{" "}
+          <span className="font-semibold">Healthy lungs</span> and{" "}
+          <span className="font-semibold">Pneumonia-affected lungs</span>.
+        </p>
       </section>
 
       {/* Call to Action */}
@@ -74,7 +69,7 @@ function HomePage() {
 
       {/* Footer */}
       <footer className="mt-16 py-6 text-center text-sm text-gray-200">
-        © 2025 Pneumonia Analyzer | Built with ❤️ by Henry
+         Pneumonia Analyzer | Built with ❤️ by HackSparrow
       </footer>
     </div>
   );
