@@ -1,0 +1,3 @@
+image,Prediction,Confidence,Grad-CAM Heatmap,Detected Regions,timestamp
+.gradio\flagged\image\ee0bd97895b0f85c1272\Screenshot 2025-09-09 031426.png,PNEUMONIA,85.02%,.gradio\flagged\Grad-CAM Heatmap\d1c046edc05cde6e7463\image.webp,.gradio\flagged\Detected Regions\476fe5ad64332ba77003\image.webp,2025-09-09 10:38:48.267022
+.gradio\flagged\image\dd615912d0aa63d68d91\Screenshot 2025-09-09 025546.png,PNEUMONIA,94.02%,.gradio\flagged\Grad-CAM Heatmap\a455e303feb57f7f58b2\image.webp,.gradio\flagged\Detected Regions\9c814f4fbdfafbbc4555\image.webp,2025-09-09 10:43:28.248968
