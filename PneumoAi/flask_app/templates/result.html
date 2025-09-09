@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Prediction Result</h2>
+<p><strong>Prediction:</strong> {{ label }}</p>
+<p><strong>Confidence:</strong> {{ confidence }}%</p>
+<img src="{{ url_for('static', filename='uploads/' + uploaded_file) }}" width="300">
+<img src="{{ url_for('static', filename='gradcam/' + gradcam_file) }}" width="300">
+<br><br>
+<a href="{{ url_for('upload') }}">Upload Another</a>
+{% endblock %}

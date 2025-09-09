@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PneumoDetect</title>
+</head>
+<body>
+    <header>
+        <h1>PneumoDetect AI</h1>
+        {% if session.get('user') %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </header>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

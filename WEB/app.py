@@ -80,8 +80,6 @@ def generate_heatmap_and_boxes(image_path, target_class):
         if area > 50:  # Ignore tiny noise
             x, y, w, h = cv2.boundingRect(contour)
             cv2.rectangle(img_bgr, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.putText(img_bgr, f"Spot {region_count + 1}", (x, y - 5),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
             region_count += 1
 
     print(f"[INFO] Detected {region_count} affected regions")
